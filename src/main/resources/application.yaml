@@ -28,11 +28,11 @@ spring:
       mode: always  #colocado para subir data.sql
   data:
     mongodb:
-      username: root
-      password: example
-      host: localhost
-      port: 27017
-      database: api-food
+      username: ${MONGO_USERNAME:root}
+      password: ${MONGO_PASSWORD:example}
+      host: ${MONGO_HOST:localhost}
+      port: ${MONGO_PORT:27017}
+      database: ${MONGO_DATABASE:api-food}
       authentication-database: admin
 springdoc:
   api-docs:
