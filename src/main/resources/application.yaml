@@ -26,7 +26,14 @@ spring:
   sql:
     init:
       mode: always  #colocado para subir data.sql
-
+  data:
+    mongodb:
+      username: root
+      password: example
+      host: localhost
+      port: 27017
+      database: api-food
+      authentication-database: admin
 springdoc:
   api-docs:
     enabled: true
