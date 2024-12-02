@@ -9,8 +9,4 @@ public class StoreNotFound extends RuntimeException {
     public StoreNotFound() {
         super("Store not exists");
     }
-
-    public StoreNotFound(String message) {
-        super(message);
-    }
 }

@@ -4,6 +4,7 @@ import br.com.api_food.domain.entity.category.CategoryDomain;
 import br.com.api_food.domain.entity.product.ProductDomain;
 import br.com.api_food.domain.persistence.category.CategoryPersistence;
 import br.com.api_food.domain.useCases.category.DeleteCategoryById;
+import br.com.api_food.domain.useCases.category.FindCategoryById;
 import br.com.api_food.domain.useCases.product.FindAllByCategoryId;
 import br.com.api_food.useCases.category.exceptions.CategoryNotFound;
 import br.com.api_food.useCases.category.exceptions.ExistProductInCategory;
@@ -19,14 +20,13 @@ import java.util.stream.Collectors;
 public class DeleteCategoryByIdImpl implements DeleteCategoryById {
 
     private final CategoryPersistence categoryPersistence;
+    private final FindCategoryById findCategoryById;
     private final FindAllByCategoryId findAllByCategoryId;
 
     @Override
     public void execute(UUID id) {
 
-        CategoryDomain categoryDomain = categoryPersistence.findById(id)
-                .orElseThrow(CategoryNotFound::new);
-
+        CategoryDomain categoryDomain = findCategoryById.execute(id);
         List<ProductDomain> allByCategory = findAllByCategoryId.execute(categoryDomain.getId());
 
         if (!allByCategory.isEmpty()) {
